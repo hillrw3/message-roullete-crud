@@ -28,4 +28,19 @@ class App < Sinatra::Application
     redirect "/"
   end
 
+  get '/:index/edit' do
+    @id = params[:index]
+    @message = @database_connection.sql("select message from messages where id = #{@id}").pop["message"]
+    erb :edit
+  end
+
+  patch '/:index' do
+    id = params[:index]
+    new_message = params[:message]
+    @database_connection.sql("UPDATE messages SET message='#{new_message}' where id = #{id}")
+    redirect '/'
+  end
+
+
+
 end

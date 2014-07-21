@@ -1,0 +1,6 @@
+<form method="post" action="/<%= @id %>">
+  <label for="message">Edit this message:<br>
+  <textarea name="message" id="message"><%= @message %></textarea></label>
+  <input type="hidden" name="_method" value="patch"><br>
+  <input type="submit" value="Edit Message">
+</form>

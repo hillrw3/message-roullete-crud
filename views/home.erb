@@ -4,9 +4,12 @@
   <button>Submit</button>
 </form>
 
+<ul>
 <% messages.each do |message| %>
-
-  <li><%= message["message"] %></li>
-
+  <li>
+    <%= message["message"] %>
+    <form method="get" action="/<%= message["id"] %>/edit">
+      <button>Edit Message</button></form>
+  </li>
 <% end %>
-
+</ul>

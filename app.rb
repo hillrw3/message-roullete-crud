@@ -14,7 +14,7 @@ class App < Sinatra::Application
 
   get "/" do
     messages = @database_connection.sql("SELECT * FROM messages")
-
+    @comments = @database_connection.sql("SELECT * FROM comments")
     erb :home, locals: {messages: messages}
   end
 
@@ -48,6 +48,19 @@ class App < Sinatra::Application
   delete '/:index/delete' do
     id = params[:index]
     @database_connection.sql("delete from messages where id = #{id}")
+    redirect '/'
+  end
+
+  get '/add_comment/:index' do
+    @message_id = params[:index]
+    @message = @database_connection.sql("select message from messages where id = #{@message_id}").pop["message"]
+    erb :add_comment
+  end
+
+  post '/post_comment/:id' do
+    message_id = params[:id]
+    comment = params[:comment]
+    @database_connection.sql("insert into comments (comment, message_id) values ('#{comment}', #{message_id})")
     redirect '/'
   end
 

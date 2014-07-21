@@ -4,16 +4,25 @@
   <button>Submit</button>
 </form>
 
-<ul>
+<dl>
 <% messages.each do |message| %>
-  <li>
+  <dt>
     <%= message["message"] %>
+
     <form method="get" action="/<%= message["id"] %>/edit">
       <button>Edit Message</button></form>
+
     <form method="post" action="/<%= message["id"] %>/delete">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="Delete">
     </form>
-  </li>
+
+    <form method="get" action="/add_comment/<%= message["id"] %>"><button>Comment</button></form>
+  </dt>
+    <% @comments.each do |comment| %>
+      <% if comment["message_id"] == message["id"]%>
+          <dd><%= comment["comment"] %></dd>
+      <% end %>
+    <% end %>
 <% end %>
-</ul>
+</dl>

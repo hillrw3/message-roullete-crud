@@ -53,4 +53,15 @@ feature "Messages" do
     click_button "Delete"
     expect(page).to have_no_content("Hello Everyone!")
   end
+
+  scenario "I can add a comment to a message" do
+    visit '/'
+    fill_in "Message", :with => "Hello Everyone!"
+    click_button "Submit"
+    click_button "Comment"
+    expect(page).to have_content "Comment"
+    fill_in "Comment", :with => "Hello to you too!"
+    click_button "Add Comment"
+    expect(page).to have_content "Hello to you too!"
+  end
 end

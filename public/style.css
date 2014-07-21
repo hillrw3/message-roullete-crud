@@ -7,3 +7,21 @@ body {
     height: 50px;
 }
 
+#wrapper {
+    width: 50%;
+    margin: auto;
+}
+
+#buttons {
+    float: right;
+    margin: 0px;
+}
+
+#one_message {
+    border: 1px dashed black;
+}
+
+.button {
+    margin: 0px;
+    display: inline-block;
+}

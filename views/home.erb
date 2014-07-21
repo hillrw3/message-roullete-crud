@@ -6,23 +6,26 @@
 
 <dl>
 <% messages.each do |message| %>
-  <dt>
+  <div id="one_message">
+    <dt>
     <a href='/messages/<%= message["id"] %>'><%= message["message"] %></a>
+  <div id="buttons">
+    <div class="button"><form method="get" action="/<%= message["id"] %>/edit">
+      <button>Edit Message</button></form></div>
 
-    <form method="get" action="/<%= message["id"] %>/edit">
-      <button>Edit Message</button></form>
-
-    <form method="post" action="/<%= message["id"] %>/delete">
+    <div class="button"><form method="post" action="/<%= message["id"] %>/delete">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="Delete">
-    </form>
+    </form></div>
 
-    <form method="get" action="/add_comment/<%= message["id"] %>"><button>Comment</button></form>
+    <div class="button"><form method="get" action="/add_comment/<%= message["id"] %>"><button>Comment</button></form></div>
+  </div>
   </dt>
     <% @comments.each do |comment| %>
       <% if comment["message_id"] == message["id"]%>
           <dd><%= comment["comment"] %></dd>
       <% end %>
-    <% end %>
-<% end %>
+    <% end %><br><br>
+  </div>
+  <% end %>
 </dl>

@@ -4,10 +4,12 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
   <body>
+    <div id="wrapper">
     <h1>Message Roullete</h1>
     <% if flash[:error] %>
       <%= flash[:error] %><br>
     <% end %>
     <%= yield %>
+    </div>
   </body>
 </html>

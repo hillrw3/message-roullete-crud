@@ -10,6 +10,10 @@
     <%= message["message"] %>
     <form method="get" action="/<%= message["id"] %>/edit">
       <button>Edit Message</button></form>
+    <form method="post" action="/<%= message["id"] %>/delete">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete">
+    </form>
   </li>
 <% end %>
 </ul>

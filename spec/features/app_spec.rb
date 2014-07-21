@@ -34,4 +34,23 @@ feature "Messages" do
     click_button "Edit Message"
     expect(page).to have_content('New, better message')
   end
+
+  scenario "I still cannot submit a message over 140 characters when editting a message" do
+    visit '/'
+    fill_in "Message", :with => "Hello Everyone!"
+    click_button "Submit"
+    click_button "Edit Message"
+    expect(page).to have_content('Edit this message:')
+    fill_in "Edit this message:", :with => "a" * 141
+    click_button "Edit Message"
+    expect(page).to have_content("Message must be less than 140 characters.")
+  end
+
+  scenario "I can delete a message" do
+    visit '/'
+    fill_in "Message", :with => "Hello Everyone!"
+    click_button "Submit"
+    click_button "Delete"
+    expect(page).to have_no_content("Hello Everyone!")
+  end
 end

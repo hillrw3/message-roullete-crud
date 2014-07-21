@@ -37,10 +37,18 @@ class App < Sinatra::Application
   patch '/:index' do
     id = params[:index]
     new_message = params[:message]
-    @database_connection.sql("UPDATE messages SET message='#{new_message}' where id = #{id}")
+    if new_message.length <= 140
+      @database_connection.sql("UPDATE messages SET message='#{new_message}' where id = #{id}")
+    else
+      flash[:error] = "Message must be less than 140 characters."
+    end
     redirect '/'
   end
 
-
+  delete '/:index/delete' do
+    id = params[:index]
+    @database_connection.sql("delete from messages where id = #{id}")
+    redirect '/'
+  end
 
 end

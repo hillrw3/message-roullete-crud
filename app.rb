@@ -18,6 +18,13 @@ class App < Sinatra::Application
     erb :home, locals: {messages: messages}
   end
 
+  get '/messages/:id' do
+    @id = params[:id]
+    @message = @database_connection.sql("select message from messages where id = #{@id}").pop["message"]
+    @comments = @database_connection.sql("SELECT * FROM comments")
+    erb :message
+  end
+
   post "/messages" do
     message = params[:message]
     if message.length <= 140

@@ -7,7 +7,7 @@
 <dl>
 <% messages.each do |message| %>
   <dt>
-    <%= message["message"] %>
+    <a href='/messages/<%= message["id"] %>'><%= message["message"] %></a>
 
     <form method="get" action="/<%= message["id"] %>/edit">
       <button>Edit Message</button></form>
